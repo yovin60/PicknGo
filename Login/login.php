@@ -1,5 +1,4 @@
 <?php
- 
 session_start();
 ?>
 <!DOCTYPE html>
@@ -155,11 +154,7 @@ if(isset($_POST['login']))
     $eml=$_POST['email'];
 	$pw=$_POST['password'];
 	$user="MANAGER";
-
-        $_SESSION['mail']=$_POST['email'];
-        $session=$_SESSION['mail'];
-        
-
+  
         $result = mysqli_query($db, "SELECT * FROM employee where email='{$eml}'");
         while($row = mysqli_fetch_array($result))
         {
@@ -171,7 +166,8 @@ if(isset($_POST['login']))
 
             if (password_verify($pw, $row['password']) && $eml=($mail) && $user=($type)) 
                 {
-		 
+
+                
 		        echo '<script language="javascript">';
 		        echo 'alert("Login Successfull!")';
 		        echo'</script>';		

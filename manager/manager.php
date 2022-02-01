@@ -25,14 +25,14 @@ session_start();
 					<li><a href="../edit_employee_account/confirmuser.php" target="">Account Settings</a></li>
 					<li><a href="" target="">Cities</a></li>
 					<li><a href="" target="">Routes</a></li>
-                                        <li><a href="" target="">Vehicles</a></li>
-					<li><a href="" target="">Pending orders</a></li>
-					<li><a href="" target="">Approved orders</a></li>
-                                        <li><a href="" target="">Picked up orders</a></li>
-                                        <li><a href="" target="">Loaded orders</a></li>
-                                        <li><a href="" target="">Orders to be arrived</a></li>
-                                        <li><a href="" target="">Arrived orders</a></li>
-                                        <li><a href="" target="">Completed Deliveries</a></li>
+                    <li><a href="" target="">Vehicles</a></li>
+					<li><a href="../pending_orders/confirm.php" target="">Pending orders</a></li>
+					<li><a href="../approved_orders/confirm.php" target="">Approved orders</a></li>
+                    <li><a href="" target="">Picked up orders</a></li>
+                    <li><a href="" target="">Loaded orders</a></li>
+                    <li><a href="" target="">Orders to be arrived</a></li>
+                    <li><a href="" target="">Arrived orders</a></li>
+                    <li><a href="" target="">Completed Deliveries</a></li>
 					
                     
 				</ul>
