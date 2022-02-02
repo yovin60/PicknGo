@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     // Check input errors before inserting in database
     if(empty($center_err) && empty($name_err) && empty($email_err) && empty($contact_err) && empty($type_err) && empty($pass_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO employee (center_id, name, email, contact_no, user_type, password) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO employee (center_id, emp_name, email, contact_no, user_type, password) VALUES (?, ?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($db, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -127,15 +127,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     <p>Please fill this form and submit to add employee record to the database.</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Center ID</label>
+                            <label>Center</label>
                             
                             <select name="center_id" class="form-control" id="center_id">
                                 <option></option>
                                 <?php
-                                $sql2="SELECT center_id FROM operational_centers";
+                                $sql2="SELECT * FROM operational_centers";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
-                                    echo "<option value='".$row['center_id']."'>".$row['center_id']."</option>";
+                                    echo "<option value='".$row['center_id']."'>".$row['name']."</option>";
                                     }
                                 ?>
                             </select>

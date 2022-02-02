@@ -1,18 +1,18 @@
 <?php
 // Check existence of id parameter before processing further
-if(isset($_GET["emp_id"]) && !empty(trim($_GET["emp_id"]))){
+if(isset($_GET["vehicle_id"]) && !empty(trim($_GET["vehicle_id"]))){
     // Include config file
     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
     
     // Prepare a select statement
-    $sql = "SELECT * FROM employee WHERE emp_id = ?";
+    $sql = "SELECT * FROM vehicles WHERE vehicle_id = ?";
     
     if($stmt = mysqli_prepare($db, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
         
         // Set parameters
-        $param_id = trim($_GET["emp_id"]);
+        $param_id = trim($_GET["vehicle_id"]);
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -24,13 +24,12 @@ if(isset($_GET["emp_id"]) && !empty(trim($_GET["emp_id"]))){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
                 // Retrieve individual field value
-                $id = $row["emp_id"];
+                $id = $row["vehicle_id"];
                 $center = $row["center_id"];
-                $name = $row["emp_name"];
-                $email = $row["email"];
-                $contact = $row["contact_no"];
-                $type = $row["user_type"];
-                $pass = $row["password"];
+                $emp = $row["emp_id"];
+                $vehicle = $row["vehicle_name"];
+                $regno = $row["reg_no"];
+                
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: error.php");
@@ -74,33 +73,26 @@ if(isset($_GET["emp_id"]) && !empty(trim($_GET["emp_id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Emp_ID</label>
-                        <p><b><?php echo $row["emp_id"]; ?></b></p>
+                        <label>Vehicle ID</label>
+                        <p><b><?php echo $row["vehicle_id"]; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Center_ID</label>
                         <p><b><?php echo $row["center_id"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Name</label>
-                        <p><b><?php echo $row["emp_name"]; ?></b></p>
+                        <label>Driver ID</label>
+                        <p><b><?php echo $row["emp_id"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <p><b><?php echo $row["email"]; ?></b></p>
+                        <label>Vehicle Model</label>
+                        <p><b><?php echo $row["vehicle_name"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Contact no</label>
-                        <p><b><?php echo $row["contact_no"]; ?></b></p>
+                        <label>Registration No </label>
+                        <p><b><?php echo $row["reg_no"]; ?></b></p>
                     </div>
-                    <div class="form-group">
-                        <label>User Type</label>
-                        <p><b><?php echo $row["user_type"]; ?></b></p>
-                    </div>
-                    <div class="form-group">
-                        <label>Password (Hashed)</label>
-                        <p><b><?php echo $row["password"]; ?></b></p>
-                    </div>
+                  
                     <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        

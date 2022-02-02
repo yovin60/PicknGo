@@ -52,7 +52,7 @@ session_start()
           
 	    $id=$row['emp_id'];
 	    $center=$row['center_id'];
-	    $name = $row['name'];
+	    $name = $row['emp_name'];
 		$mail= $row['email'];
 		$contact = $row['contact_no'];
 		$user=$row['user_type'];

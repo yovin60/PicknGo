@@ -58,7 +58,7 @@ session_start();
                     
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM pickup_orders WHERE nearest_center='{$name}' && status='APPROVED'";
+                    $sql = "SELECT * FROM ((pickup_orders INNER JOIN customer ON pickup_orders.cus_id = customer.cus_id) INNER JOIN employee ON pickup_orders.emp_id = employee.emp_id) WHERE nearest_center='{$name}' && status='APPROVED'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
@@ -84,7 +84,7 @@ session_start();
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
                                         echo "<td>" . $row['order_id'] ."</td>";
-                                        echo "<td>" . $row['cus_id'] ."</td>";
+                                        echo "<td>" . $row['cus_name'] ."</td>";
                                         echo "<td>" . $row['order_name'] ."</td>";
                                         echo "<td>" . $row['date_time'] ."</td>";
                                         echo "<td>" . $row['pickup_address'] ."</td>";
@@ -94,7 +94,7 @@ session_start();
                                         echo "<td>" . $row['receiver_contactno'] . "</td>";
                                         echo "<td>" . $row['nearest_center'] . "</td>";
                                         echo "<td>" . $row['pickup_time'] . "</td>";
-                                        echo "<td>" . $row['emp_id'] . "</td>";
+                                        echo "<td>" . $row['emp_name'] . "</td>";
                                         echo "<td>" . $row['status'] . "</td>";
                                         echo "<td>";
                                             echo '<a href="read.php?order_id='. $row['order_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';

@@ -157,16 +157,16 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <span class="invalid-feedback"><?php echo $time_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Employee ID</label>
+                            <label>Employee</label>
                             
                             <select name="emp_id" class="form-control" id="emp_id">
                                 <option></option>
                                 <?php
                                 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-                                $sql2="SELECT emp_id FROM employee WHERE user_type='DRIVER'";
+                                $sql2="SELECT * FROM employee WHERE user_type='DRIVER'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
-                                    echo "<option value='".$row['emp_id']."'>".$row['emp_id']."</option>";
+                                    echo "<option value='".$row['emp_id']."'>".$row['emp_name']."</option>";
                                     }
                                 ?>
                             </select>

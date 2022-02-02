@@ -1,18 +1,18 @@
 <?php
 // Check existence of id parameter before processing further
-if(isset($_GET["emp_id"]) && !empty(trim($_GET["emp_id"]))){
+if(isset($_GET["city_id"]) && !empty(trim($_GET["city_id"]))){
     // Include config file
     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
     
     // Prepare a select statement
-    $sql = "SELECT * FROM employee WHERE emp_id = ?";
+    $sql = "SELECT * FROM cities WHERE city_id = ?";
     
     if($stmt = mysqli_prepare($db, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
         
         // Set parameters
-        $param_id = trim($_GET["emp_id"]);
+        $param_id = trim($_GET["city_id"]);
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -24,13 +24,10 @@ if(isset($_GET["emp_id"]) && !empty(trim($_GET["emp_id"]))){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
                 // Retrieve individual field value
-                $id = $row["emp_id"];
+                $id = $row["city_id"];
                 $center = $row["center_id"];
-                $name = $row["emp_name"];
-                $email = $row["email"];
-                $contact = $row["contact_no"];
-                $type = $row["user_type"];
-                $pass = $row["password"];
+                $name = $row["city_name"];
+                
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: error.php");
@@ -74,8 +71,8 @@ if(isset($_GET["emp_id"]) && !empty(trim($_GET["emp_id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Emp_ID</label>
-                        <p><b><?php echo $row["emp_id"]; ?></b></p>
+                        <label>City_ID</label>
+                        <p><b><?php echo $row["city_id"]; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Center_ID</label>
@@ -83,24 +80,9 @@ if(isset($_GET["emp_id"]) && !empty(trim($_GET["emp_id"]))){
                     </div>
                     <div class="form-group">
                         <label>Name</label>
-                        <p><b><?php echo $row["emp_name"]; ?></b></p>
+                        <p><b><?php echo $row["city_name"]; ?></b></p>
                     </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <p><b><?php echo $row["email"]; ?></b></p>
-                    </div>
-                    <div class="form-group">
-                        <label>Contact no</label>
-                        <p><b><?php echo $row["contact_no"]; ?></b></p>
-                    </div>
-                    <div class="form-group">
-                        <label>User Type</label>
-                        <p><b><?php echo $row["user_type"]; ?></b></p>
-                    </div>
-                    <div class="form-group">
-                        <label>Password (Hashed)</label>
-                        <p><b><?php echo $row["password"]; ?></b></p>
-                    </div>
+                  
                     <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        

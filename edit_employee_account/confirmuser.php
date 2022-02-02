@@ -57,7 +57,7 @@
 								Continue
 							</button>
                             </div>
-                            <a href="../index.html"> Return to Home Page </a>
+                            <a href="../manager/manager.php"> Return to Home Page </a>
 					
 				
 			</div>

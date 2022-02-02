@@ -52,14 +52,14 @@ session_start();
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM pickup_orders WHERE nearest_center = '{$name}' && status='PENDING'";
+                    $sql = "SELECT * FROM pickup_orders INNER JOIN customer ON pickup_orders.cus_id = customer.cus_id WHERE nearest_center = '{$name}' && status='PENDING'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th>Order_ID</th>";
-                                        echo "<th>Cus_ID</th>";
+                                        echo "<th>Customer Name</th>";
                                         echo "<th>Order_Name</th>";
                                         echo "<th>Timestamp</th>";
                                         echo "<th>Pickup Address</th>";
@@ -76,7 +76,7 @@ session_start();
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
                                         echo "<td>" . $row['order_id'] ."</td>";
-                                        echo "<td>" . $row['cus_id'] ."</td>";
+                                        echo "<td>" . $row['cus_name'] ."</td>";
                                         echo "<td>" . $row['order_name'] ."</td>";
                                         echo "<td>" . $row['date_time'] ."</td>";
                                         echo "<td>" . $row['pickup_address'] ."</td>";
