@@ -1,14 +1,11 @@
-
-<?php 
-// starting the session
+<?php
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Approved Orders</title>
+    <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -16,7 +13,7 @@ session_start();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         .wrapper{
-            width: 0 auto;
+            width: 0 autp;
             margin: 0 auto;
         }
         table tr td:last-child{
@@ -35,70 +32,59 @@ session_start();
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Approved Orders</h2>
+                        <h2 class="pull-left">Loaded Orders</h2>
+                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Load next order </a>
                     </div>
                     <?php
-
                     $name="";
-                    if (isset($_POST['name'] )) 
+                    if (isset($_POST['center_id'] )) 
                         {
-                          $name = $_POST['name'];
-                          $_SESSION['branchname']=$name;
+                        $name = $_POST['center_id'];
+                        $_SESSION['center_id']=$name;
                        
                         }
                         else{
-                            $name=$_SESSION['branchname'];
+                            $name=$_SESSION['center_id'];
                         }
-                    
-
-                    // DB Connect
+                    // DB connect
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-
                     
-                    
-
                     // Attempt select query execution
-                    $sql = "SELECT * FROM ((pickup_orders INNER JOIN customer ON pickup_orders.cus_id = customer.cus_id) INNER JOIN employee ON pickup_orders.emp_id = employee.emp_id) WHERE nearest_center='{$name}' && status='APPROVED'";
+                    $sql = "SELECT * FROM (((loaded_items 
+                        INNER JOIN pickedup_items ON loaded_items.picked_id = pickedup_items.picked_id) 
+                        INNER JOIN operational_centers ON loaded_items.destination_center_id = operational_centers.center_id) 
+                        INNER JOIN employee ON loaded_items.emp_id = employee.emp_id) 
+                        WHERE pickedup_items.center_id = '{$name}'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th>Order_ID</th>";
-                                        echo "<th>Cus_ID</th>";
-                                        echo "<th>Order_Name</th>";
-                                        echo "<th>Timestamp</th>";
-                                        echo "<th>Pickup Address</th>";
-                                        echo "<th>Availability</th>";
-                                        echo "<th>Receiver Name</th>";
-                                        echo "<th>Receiver Address</th>";
-                                        echo "<th>Receiver Number</th>";
-                                        echo "<th>Nearest Center</th>";
-                                        echo "<th>Pickup Time</th>";
-                                        echo "<th>Driver ID</th>";
-                                        echo "<th>Status</th>";
+                                        echo "<th>Load ID</th>";
+                                        echo "<th>Picked ID</th>";
+                                        echo "<th>Order ID</th>";
+                                        echo "<th>Destination Center</th>";
+                                        echo "<th>Driver</th>";
+                                        echo "<th>Route ID</th>";
+                                        echo "<th>Loaded Date & Time</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
+                                        echo "<td>" . $row['load_id'] ."</td>";
+                                        echo "<td>" . $row['picked_id'] ."</td>";
                                         echo "<td>" . $row['order_id'] ."</td>";
-                                        echo "<td>" . $row['cus_name'] ."</td>";
-                                        echo "<td>" . $row['order_name'] ."</td>";
-                                        echo "<td>" . $row['date_time'] ."</td>";
-                                        echo "<td>" . $row['pickup_address'] ."</td>";
-                                        echo "<td>" . $row['availability'] . "</td>";
-                                        echo "<td>" . $row['receiver_name'] . "</td>";
-                                        echo "<td>" . $row['receiver_address'] . "</td>";
-                                        echo "<td>" . $row['receiver_contactno'] . "</td>";
-                                        echo "<td>" . $row['nearest_center'] . "</td>";
-                                        echo "<td>" . $row['pickup_time'] . "</td>";
-                                        echo "<td>" . $row['emp_name'] . "</td>";
-                                        echo "<td>" . $row['status'] . "</td>";
+                                        echo "<td>" . $row['name'] ."</td>";
+                                        echo "<td>" . $row['emp_name'] ."</td>";
+                                        echo "<td>" . $row['route_id'] ."</td>";
+                                        echo "<td>" . $row['loaded_time'] ."</td>";
+                                        
                                         echo "<td>";
-                                            echo '<a href="read.php?order_id='. $row['order_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            
+                                            echo '<a href="read.php?load_id='. $row['load_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            echo '<a href="update.php?load_id='. $row['load_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            echo '<a href="delete.php?load_id='. $row['load_id'] .'" class="mr-3" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -116,11 +102,9 @@ session_start();
                     // Close connection
                     mysqli_close($db);
                     ?>
-                </center>
                 </div>
-                   <p><a href="confirm.php" class="btn btn-secondary ml-2">Back</a></p>
+                    <p><a href="../loaded_items/confirm.php" class="btn btn-primary">Back</a></p>
                 </div>
-                </center>
                 </div>
             </div>        
         </div>

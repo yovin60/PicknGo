@@ -24,13 +24,13 @@ session_start();
 					<li><a href="../index.html">Log out</a></li>
 					<li><a href="../edit_employee_account/confirmuser.php" target="">Account Settings</a></li>
 					<li><a href="../crud_cities/index.php" target="">Cities</a></li>
-                                        <li><a href="../crud_vehicles/index.php" target="">Vehicles</a></li>					
-                                        <li><a href="../crud_routes/index.php" target="">Routes</a></li>
+                    <li><a href="../crud_vehicles/index.php" target="">Vehicles</a></li>					
+                    <li><a href="../crud_routes/index.php" target="">Routes</a></li>
 					<li><a href="../pending_orders/confirm.php" target="">Pending orders</a></li>
 					<li><a href="../approved_orders/confirm.php" target="">Approved orders</a></li>
-                    <li><a href="" target="">Picked up orders</a></li>
-                    <li><a href="" target="">Loaded orders</a></li>
-                    <li><a href="" target="">Orders to be arrived</a></li>
+                    <li><a href="../pickedup_items/confirm.php" target="">Picked up orders</a></li>
+                    <li><a href="../loaded_items/confirm.php" target="">Loaded orders</a></li>
+                    <li><a href="../items_to_be_arrived/confirm.php" target="">Orders to be arrived</a></li>
                     <li><a href="" target="">Arrived orders</a></li>
                     <li><a href="" target="">Completed Deliveries</a></li>
 					
