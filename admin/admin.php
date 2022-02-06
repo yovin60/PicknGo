@@ -1,5 +1,18 @@
 <?php 
 session_start();
+$mail = $_SESSION['mail'];
+$db = mysqli_connect('localhost', 'root', '', 'pickandgo');
+$result = mysqli_query($db, "SELECT * FROM employee 
+	INNER JOIN operational_centers ON employee.center_id = operational_centers.center_id 
+	where email='{$mail}'");
+
+    while($row = mysqli_fetch_array($result))
+    
+    {
+        $_SESSION['center'] = $row['center_id'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['cname'] = $row['name'];
+    }
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -26,7 +39,7 @@ session_start();
 			<nav id="menu">
 				<ul class="links">
 					<li><a href="../index.html">Log out</a></li>
-					<li><a href="../edit_admin_account/confirmuser.php" target="">Account Settings</a></li>
+					<li><a href="../edit_admin_account/editdetails.php" target="">Account Settings</a></li>
 					<li><a href="../crud_operational_centers/index.php" target="">Operational Centers</a></li>
 					<li><a href="../crud_employees/index.php">Employees</a></li>
 					

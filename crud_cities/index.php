@@ -1,5 +1,6 @@
 <?php
 session_start();
+$centerid = $_SESSION['center'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@ session_start();
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM cities INNER JOIN operational_centers ON cities.center_id = operational_centers.center_id";
+                    $sql = "SELECT * FROM cities INNER JOIN operational_centers ON cities.center_id = operational_centers.center_id WHERE cities.center_id = '{$centerid}'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';

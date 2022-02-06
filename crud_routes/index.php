@@ -1,5 +1,6 @@
 <?php
 session_start();
+$centerid = $_SESSION['cname'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,15 +33,15 @@ session_start();
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Vehicles</h2>
-                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Vehicle</a>
+                        <h2 class="pull-left">Routes</h2>
+                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Route</a>
                     </div>
                     <?php
                     // DB connect
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM routes";
+                    $sql = "SELECT * FROM routes WHERE start_center = '{$centerid}'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';

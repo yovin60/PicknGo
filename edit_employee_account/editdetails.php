@@ -1,5 +1,6 @@
 <?php
-session_start()
+session_start();
+$email = $_SESSION['email'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +46,7 @@ session_start()
 
      $update= true;
 	
-	$query = mysqli_query($db, "SELECT * FROM employee WHERE email='{$_POST['email']}'");
+	$query = mysqli_query($db, "SELECT * FROM employee WHERE email='{$email}'");
 
      while($row = mysqli_fetch_array($query))
    {
@@ -73,9 +74,9 @@ session_start()
 
 	    $eml=$_POST['mail'];
 		echo '<script language="javascript">';
-		echo 'alert("Confirm your email to check results!")';
+		echo 'alert("Your account details were updated. Please login again!")';
 		echo'</script>';			
-		echo "<script> location.href='confirmuser.php';</script>";
+		echo "<script> location.href='../login/login.php';</script>";
 		exit; 			
 		
   	}

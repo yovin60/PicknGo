@@ -1,6 +1,7 @@
 <?php
 session_start();
 $centerid = $_SESSION['center'];
+$cname = $_SESSION['cname'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,51 +33,64 @@ $centerid = $_SESSION['center'];
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Loaded Orders</h2>
-                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Load next order </a>
+                    
+                    <div class="mt-5 mb-3 clearfix"> 
+                        <h2 class="pull-left">Arrived Orders</h2>
+                        <a href=" create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Mark next order </a>
                     </div>
+                    
                     <?php
                     
                     // DB connect
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM (((loaded_items 
-                        INNER JOIN pickedup_items ON loaded_items.picked_id = pickedup_items.picked_id) 
-                        INNER JOIN operational_centers ON loaded_items.destination_center_id = operational_centers.center_id) 
-                        INNER JOIN employee ON loaded_items.emp_id = employee.emp_id) 
-                        WHERE pickedup_items.center_id = '{$centerid}'";
+                    $sql = "SELECT * FROM ((((((arrived_items
+                    INNER JOIN pickedup_items ON arrived_items.picked_id = pickedup_items.picked_id)
+                    INNER JOIN pickup_orders ON arrived_items.order_id = pickup_orders.order_id)
+                    INNER JOIN employee ON arrived_items.emp_id = employee.emp_id)
+                    INNER JOIN loaded_items ON arrived_items.load_id = loaded_items.load_id)
+                    INNER JOIN routes ON arrived_items.route_id = routes.route_id)
+                    INNER JOIN operational_centers ON arrived_items.center_id = operational_centers.center_id)  
+                    WHERE arrived_items.center_id = '{$centerid}'";
+
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th>Load ID</th>";
-                                        echo "<th>Picked ID</th>";
-                                        echo "<th>Order ID</th>";
-                                        echo "<th>Destination Center</th>";
+                                        echo "<th>Arrived ID</th>";
+                                        echo "<th>Tracking No</th>";
+                                        echo "<th>Receiver Name</th>";
+                                        echo "<th>Receiver Address</th>";
+                                        echo "<th>Contact No</th>";
                                         echo "<th>Driver</th>";
                                         echo "<th>Route ID</th>";
-                                        echo "<th>Loaded Date & Time</th>";
+                                        echo "<th>Order Name</th>";
+                                        echo "<th>Price</th>";
+                                        echo "<th>Arrived Date & Time</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['load_id'] ."</td>";
+                                        echo "<td>" . $row['arrived_id'] ."</td>";
                                         echo "<td>" . $row['picked_id'] ."</td>";
-                                        echo "<td>" . $row['order_id'] ."</td>";
-                                        echo "<td>" . $row['name'] ."</td>";
+                                        echo "<td>" . $row['receiver_name'] ."</td>";
+                                        echo "<td>" . $row['receiver_address'] ."</td>";
+                                        echo "<td>" . $row['receiver_contactno'] ."</td>";
                                         echo "<td>" . $row['emp_name'] ."</td>";
                                         echo "<td>" . $row['route_id'] ."</td>";
-                                        echo "<td>" . $row['loaded_time'] ."</td>";
+                                        echo "<td>" . $row['order_name'] ."</td>";
+                                        echo "<td>" . $row['price'] ."</td>";
+                                        echo "<td>" . $row['arrived_time'] ."</td>";
                                         
                                         echo "<td>";
-                                            echo '<a href="read.php?load_id='. $row['load_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="update.php?load_id='. $row['load_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="delete.php?load_id='. $row['load_id'] .'" class="mr-3" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="read.php?arrived_id='. $row['arrived_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            echo '<a href="update.php?arrived_id='. $row['arrived_id'] .' " class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            echo '<a href="updatetracking.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="Update Tracking" data-toggle="tooltip"><span class="fa fa-spinner fa-pulse"></span></a>';
+                                            echo '<a href="delete.php?arrived_id='. $row['arrived_id'] .'" class="mr-3" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }

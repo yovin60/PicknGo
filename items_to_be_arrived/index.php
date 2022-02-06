@@ -1,5 +1,6 @@
 <?php
 session_start();
+$centerid = $_SESSION['center'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,16 +36,7 @@ session_start();
                         <h2 class="pull-left">Items to be arrived</h2>
                     </div>
                     <?php
-                    $name="";
-                    if (isset($_POST['center_id'] )) 
-                        {
-                        $name = $_POST['center_id'];
-                        $_SESSION['center_id']=$name;
-                       
-                        }
-                        else{
-                            $name=$_SESSION['center_id'];
-                        }
+                    
                     // DB connect
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
                     
@@ -52,7 +44,7 @@ session_start();
                     $sql = "SELECT * FROM ((loaded_items 
                         INNER JOIN operational_centers ON loaded_items.destination_center_id = operational_centers.center_id) 
                         INNER JOIN employee ON loaded_items.emp_id = employee.emp_id) 
-                        WHERE loaded_items.destination_center_id = '{$name}'";
+                        WHERE loaded_items.destination_center_id = '{$centerid}'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
@@ -102,7 +94,7 @@ session_start();
                     mysqli_close($db);
                     ?>
                 </div>
-                    <p><a href="../items_to_be_arrived/confirm.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="../manager/manager.php" class="btn btn-primary">Back</a></p>
                 </div>
                 </div>
             </div>        

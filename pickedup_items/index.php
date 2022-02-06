@@ -1,5 +1,6 @@
 <?php
 session_start();
+$centerid = $_SESSION['cname'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,21 +37,12 @@ session_start();
                         <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> New Pickup</a>
                     </div>
                     <?php
-                    $name="";
-                    if (isset($_POST['center_id'] )) 
-                        {
-                        $name = $_POST['center_id'];
-                        $_SESSION['center_id']=$name;
-                       
-                        }
-                        else{
-                            $name=$_SESSION['center_id'];
-                        }
+                    
                     // DB connect
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM pickedup_items INNER JOIN operational_centers ON pickedup_items.center_id = operational_centers.center_id WHERE name = '{$name}'";
+                    $sql = "SELECT * FROM pickedup_items INNER JOIN operational_centers ON pickedup_items.center_id = operational_centers.center_id WHERE name = '{$centerid}'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
@@ -103,7 +95,7 @@ session_start();
                     mysqli_close($db);
                     ?>
                 </div>
-                    <p><a href="../pickedup_items/confirm.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="../manager/manager.php" class="btn btn-primary">Back</a></p>
                 </div>
                 </div>
             </div>        

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (isset($_POST['login'])) {
+
+	$_SESSION['mail'] = $_POST['email'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

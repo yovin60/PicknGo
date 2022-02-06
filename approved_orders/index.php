@@ -2,6 +2,7 @@
 <?php 
 // starting the session
 session_start();
+$centerid = $_SESSION['cname'];
 ?>
 
 <!DOCTYPE html>
@@ -38,27 +39,15 @@ session_start();
                         <h2 class="pull-left">Approved Orders</h2>
                     </div>
                     <?php
-
-                    $name="";
-                    if (isset($_POST['name'] )) 
-                        {
-                          $name = $_POST['name'];
-                          $_SESSION['branchname']=$name;
-                       
-                        }
-                        else{
-                            $name=$_SESSION['branchname'];
-                        }
                     
 
                     // DB Connect
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
 
-                    
-                    
+
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM ((pickup_orders INNER JOIN customer ON pickup_orders.cus_id = customer.cus_id) INNER JOIN employee ON pickup_orders.emp_id = employee.emp_id) WHERE nearest_center='{$name}' && status='APPROVED'";
+                    $sql = "SELECT * FROM ((pickup_orders INNER JOIN customer ON pickup_orders.cus_id = customer.cus_id) INNER JOIN employee ON pickup_orders.emp_id = employee.emp_id) WHERE nearest_center='{$centerid}' && status='APPROVED'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
@@ -118,7 +107,7 @@ session_start();
                     ?>
                 </center>
                 </div>
-                   <p><a href="confirm.php" class="btn btn-secondary ml-2">Back</a></p>
+                   <p><a href="../manager/manager.php" class="btn btn-secondary ml-2">Back</a></p>
                 </div>
                 </center>
                 </div>
