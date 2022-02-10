@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mail = $_SESSION['email'];
+$email = $_SESSION['email'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +46,7 @@ $mail = $_SESSION['email'];
 
      $update= true;
 	
-	$query = mysqli_query($db, "SELECT * FROM admin WHERE email='{$mail}'");
+	$query = mysqli_query($db, "SELECT * FROM admin WHERE email='{$email}'");
 
      while($row = mysqli_fetch_array($query))
    {

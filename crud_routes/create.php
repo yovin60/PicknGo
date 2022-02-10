@@ -1,4 +1,9 @@
 <?php
+session_start();
+$centerid = $_SESSION['cname'];
+$branch = $_SESSION['center'];
+?>
+<?php
 // Include config file
 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
  
@@ -114,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                             <select name="start_center" class="form-control" id="start_center">
                                 <option></option>
                                 <?php
-                                $sql2="SELECT * FROM operational_centers";
+                                $sql2="SELECT * FROM operational_centers WHERE name = '{$centerid}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['name']."'>".$row['name']."</option>";
@@ -129,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                             <select name="start_city" class="form-control" id="start_city">
                                 <option></option>
                                 <?php
-                                $sql2="SELECT * FROM cities";
+                                $sql2="SELECT * FROM cities WHERE center_id = '{$branch}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['city_name']."'>".$row['city_name']."</option>";

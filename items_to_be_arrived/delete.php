@@ -61,7 +61,7 @@ if(isset($_POST["load_id"]) && !empty($_POST["load_id"])){
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="alert alert-danger">
                             <input type="hidden" name="load_id" value="<?php echo trim($_GET["load_id"]); ?>"/>
-                            <p>Are you sure you want to delete this employee record?</p>
+                            <p>Are you sure you want to delete the selected record?</p>
                             <p>
                                 <input type="submit" value="Yes" class="btn btn-danger">
                                 <a href="index.php" class="btn btn-secondary">No</a>

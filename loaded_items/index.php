@@ -1,6 +1,7 @@
 <?php
 session_start();
 $centerid = $_SESSION['center'];
+$branch = $_SESSION['cname'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

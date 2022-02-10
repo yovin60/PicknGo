@@ -9,7 +9,7 @@ if(isset($_POST['continue']) && $_POST['email'] && $_POST['password'])
   mysqli_query($db, "UPDATE employee SET password='$hashed' WHERE `email`='{$email}' ");
   
   $_SESSION['message'] =  "$hashed";
-    echo "Passowrd Reset Successfull! Please login again!<br>";
+    echo "Passowrd Reset Successfull! Please open the website in a new tab and login again!<br>";
     echo $_SESSION['message'];
     echo '<script language="javascript">';
     echo 'alert("Password updated successfully!!")';

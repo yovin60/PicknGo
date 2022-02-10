@@ -1,4 +1,8 @@
 <?php
+session_start();
+$branch = $_SESSION['center'];
+?>
+<?php
 // Include config file
 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
  
@@ -163,7 +167,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                                 <option></option>
                                 <?php
                                 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-                                $sql2="SELECT * FROM employee WHERE user_type='DRIVER'";
+                                $sql2="SELECT * FROM employee WHERE user_type='DRIVER' && center_id = '{$branch}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['emp_id']."'>".$row['emp_name']."</option>";

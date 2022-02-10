@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
             {
                 echo '<script language="javascript">';
-                echo 'alert("Please Check your Detials and try again!")';
+                echo 'alert("Please Check your Details and try again!")';
                 echo'</script>';        
                 echo "<script> location.href='create.php';</script>";
                 exit;

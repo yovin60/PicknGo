@@ -1,4 +1,8 @@
 <?php
+session_start();
+$centerid = $_SESSION['center'];
+?>
+<?php
 // Include config file
 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
  
@@ -140,7 +144,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                                 <option></option>
                                 <?php
                                 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-                                $sql2="SELECT * FROM operational_centers";
+                                $sql2="SELECT * FROM operational_centers WHERE center_id = '{$centerid}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['center_id']."'>".$row['name']."</option>";

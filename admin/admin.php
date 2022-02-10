@@ -2,16 +2,14 @@
 session_start();
 $mail = $_SESSION['mail'];
 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-$result = mysqli_query($db, "SELECT * FROM employee 
-	INNER JOIN operational_centers ON employee.center_id = operational_centers.center_id 
-	where email='{$mail}'");
+$result = mysqli_query($db, "SELECT * FROM admin WHERE email='{$mail}'");
 
     while($row = mysqli_fetch_array($result))
     
     {
-        $_SESSION['center'] = $row['center_id'];
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['cname'] = $row['name'];
+       
+       $_SESSION['email'] = $row['email'];
+        
     }
 ?>
 <!DOCTYPE HTML>

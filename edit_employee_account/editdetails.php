@@ -70,7 +70,7 @@ $email = $_SESSION['email'];
 		$contact = $_POST['contact'];
 		
 
-	mysqli_query($db, "UPDATE employee SET name ='$name',email ='$mail',contact_no ='$contact' WHERE emp_id='{$id}' ");
+	mysqli_query($db, "UPDATE employee SET emp_name ='$name',email ='$mail',contact_no ='$contact' WHERE emp_id='{$id}' ");
 
 	    $eml=$_POST['mail'];
 		echo '<script language="javascript">';

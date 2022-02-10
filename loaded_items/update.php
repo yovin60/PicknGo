@@ -1,4 +1,9 @@
 <?php
+session_start();
+$centerid = $_SESSION['center'];
+$branch = $_SESSION['cname'];
+?>
+<?php
 // Include config file
 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
  
@@ -179,7 +184,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                                 <option></option>
                                 <?php
                                 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-                                $sql2="SELECT * FROM pickedup_items";
+                                $sql2="SELECT * FROM pickedup_items WHERE center_id = '{$centerid}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['picked_id']."'>".$row['picked_id']."</option>";
@@ -193,7 +198,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <select name="order_id" class="form-control" id="order_id">
                                 <option></option>
                                 <?php
-                                $sql2="SELECT * FROM pickedup_items";
+                                $sql2="SELECT * FROM pickedup_items WHERE center_id = '{$centerid}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['order_id']."'>".$row['order_id']."</option>";
@@ -221,7 +226,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <select name="emp_id" class="form-control" id="emp_id">
                                 <option></option>
                                 <?php
-                                $sql2="SELECT * FROM employee WHERE user_type='DRIVER'";
+                                $sql2="SELECT * FROM employee WHERE user_type='DRIVER' && center_id = '{$centerid}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['emp_id']."'>".$row['emp_name']."</option>";
@@ -235,7 +240,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <select name="route_id" class="form-control" id="route_id">
                                 <option></option>
                                 <?php
-                                $sql2="SELECT * FROM routes";
+                                $sql2="SELECT * FROM routes WHERE start_center = '{$branch}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
                                     echo "<option value='".$row['route_id']."'>".$row['route_id']."</option>";
