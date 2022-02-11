@@ -1,6 +1,7 @@
 <?php
 session_start();
-$centerid = $_SESSION['cname'];
+$centerid = $_SESSION['center'];
+$emp = $_SESSION['emp_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,8 +34,7 @@ $centerid = $_SESSION['cname'];
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Pickup Orders</h2>
-                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> New Pickup</a>
+                        <h2 class="pull-left">loaded Items to be delivered</h2>
                     </div>
                     <?php
                     
@@ -42,20 +42,22 @@ $centerid = $_SESSION['cname'];
                     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM pickedup_items INNER JOIN operational_centers ON pickedup_items.center_id = operational_centers.center_id WHERE name = '{$centerid}'";
+                    $sql = "SELECT * FROM ((loaded_items 
+                        INNER JOIN operational_centers ON loaded_items.destination_center_id = operational_centers.center_id) 
+                        INNER JOIN employee ON loaded_items.emp_id = employee.emp_id) 
+                        WHERE loaded_items.emp_id = '{$emp}'";
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
+                                        echo "<th>Load ID</th>";
                                         echo "<th>Picked ID</th>";
                                         echo "<th>Order ID</th>";
-                                        echo "<th>Center</th>";
-                                        echo "<th>Weight (Kg)</th>";
-                                        echo "<th>Type</th>";
-                                        echo "<th>Size</th>";
-                                        echo "<th>Distance (Km)</th>";
-                                        echo "<th>Price (Rs)</th>";
+                                        echo "<th>Destination Center</th>";
+                                        echo "<th>Driver</th>";
+                                        echo "<th>Route ID</th>";
+                                        echo "<th>Loaded Date & Time</th>";
                                         echo "<th>Status</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
@@ -63,20 +65,18 @@ $centerid = $_SESSION['cname'];
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
+                                        echo "<td>" . $row['load_id'] ."</td>";
                                         echo "<td>" . $row['picked_id'] ."</td>";
                                         echo "<td>" . $row['order_id'] ."</td>";
                                         echo "<td>" . $row['name'] ."</td>";
-                                        echo "<td>" . $row['weight'] ."</td>";
-                                        echo "<td>" . $row['type'] ."</td>";
-                                        echo "<td>" . $row['size'] ."</td>";
-                                        echo "<td>" . $row['distance'] ."</td>";
-                                        echo "<td>" . $row['price'] ."</td>";
+                                        echo "<td>" . $row['emp_name'] ."</td>";
+                                        echo "<td>" . $row['route_id'] ."</td>";
+                                        echo "<td>" . $row['loaded_time'] ."</td>";
                                         echo "<td>" . $row['status'] ."</td>";
                                         
                                         echo "<td>";
-                                            echo '<a href="read.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="update.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-        
+                                            echo '<a href="read.php?load_id='. $row['load_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            echo '<a href="delete.php?load_id='. $row['load_id'] .'" class="mr-3" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -95,7 +95,7 @@ $centerid = $_SESSION['cname'];
                     mysqli_close($db);
                     ?>
                 </div>
-                    <p><a href="javascript:history.back(1)" class="btn btn-primary">Back</a></p>
+                    <p><a href="../driver/driver.php" class="btn btn-primary">Back</a></p>
                 </div>
                 </div>
             </div>        

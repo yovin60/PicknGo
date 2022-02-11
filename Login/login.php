@@ -159,7 +159,7 @@ if(isset($_POST['login']))
 	$pw=$_POST['password'];
 	$user="MANAGER";
   
-        $result = mysqli_query($db, "SELECT * FROM employee where email='{$eml}'");
+        $result = mysqli_query($db, "SELECT * FROM employee where email='{$eml}' && user_type='{$user}'");
         while($row = mysqli_fetch_array($result))
         {
 
@@ -206,6 +206,51 @@ else
 	}
 
 	}
+if(isset($_POST['login']))
+
+{
+
+	$db = mysqli_connect('localhost', 'root', '', 'pickandgo');
+
+    $eml=$_POST['email'];
+	$pw=$_POST['password'];
+	$user="DRIVER";
+  
+        $result = mysqli_query($db, "SELECT * FROM employee where email='{$eml}' && user_type='{$user}'");
+        while($row = mysqli_fetch_array($result))
+        {
+
+         $id=$row['password'];
+         $mail=$row['email'];
+         $type=$row['user_type'];
+
+
+            if (password_verify($pw, $row['password']) && $eml=($mail) && $user=($type)) 
+                {
+
+                
+		        echo '<script language="javascript">';
+		        echo 'alert("Login Successfull!")';
+		        echo'</script>';		
+		        echo "<script> location.href='../driver/driver.php';</script>";
+		        exit;
+                }   
+
+            else 
+
+               {
+           
+                 if(isset($_POST['login']))
+                  
+                  {
+                    echo '<script language="javascript">';
+		            echo 'alert("Please Check your Details")';
+		            echo'</script>';
+	              }
+	           }                     	
+        }   
+}
+
 
 
 ?>

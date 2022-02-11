@@ -107,7 +107,7 @@ $centerid = $_SESSION['cname'];
                     ?>
                 </center>
                 </div>
-                   <p><a href="../manager/manager.php" class="btn btn-secondary ml-2">Back</a></p>
+                   <p><a href="javascript:history.back(1)" class="btn btn-secondary ml-2">Back</a></p>
                 </div>
                 </center>
                 </div>

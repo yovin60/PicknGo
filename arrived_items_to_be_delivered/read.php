@@ -1,18 +1,18 @@
 <?php
 // Check existence of id parameter before processing further
-if(isset($_GET["picked_id"]) && !empty(trim($_GET["picked_id"]))){
+if(isset($_GET["arrived_id"]) && !empty(trim($_GET["arrived_id"]))){
     // Include config file
     $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
     
     // Prepare a select statement
-    $sql = "SELECT * FROM pickedup_items WHERE picked_id = ?";
+    $sql = "SELECT * FROM arrived_items WHERE arrived_id = ?";
     
     if($stmt = mysqli_prepare($db, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
         
         // Set parameters
-        $param_id = trim($_GET["picked_id"]);
+        $param_id = trim($_GET["arrived_id"]);
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -24,15 +24,16 @@ if(isset($_GET["picked_id"]) && !empty(trim($_GET["picked_id"]))){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
                 // Retrieve individual field value
-                $id = $row["picked_id"];
+                $arrive = $row['arrived_id'];
+                $load = $row["load_id"];
+                $picked = $row["picked_id"];
                 $order = $row["order_id"];
                 $center = $row["center_id"];
-                $weight = $row["weight"];
-                $type = $row["type"];
-                $size = $row["size"];
-                $distance = $row["distance"];
-                $price = $row["price"];
+                $emp = $row["emp_id"];
+                $route = $row["route_id"];
+                $time = $row["arrived_time"];
                 $status = $row["status"];
+                
                 
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
@@ -77,43 +78,43 @@ if(isset($_GET["picked_id"]) && !empty(trim($_GET["picked_id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Picked_ID</label>
-                        <p><b><?php echo $row["picked_id"]; ?></b></p>
+                        <label>Arrive ID</label>
+                        <p><b><?php echo $arrive; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Order_ID</label>
-                        <p><b><?php echo $row["order_id"]; ?></b></p>
+                        <label>Load ID</label>
+                        <p><b><?php echo $load; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Center_ID</label>
-                        <p><b><?php echo $row["center_id"]; ?></b></p>
+                        <label>Picked ID</label>
+                        <p><b><?php echo $picked; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Weight (Kg)</label>
-                        <p><b><?php echo $row["weight"]; ?></b></p>
+                        <label>Order ID</label>
+                        <p><b><?php echo $order; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Type</label>
-                        <p><b><?php echo $row["type"]; ?></b></p>
+                        <label>Destination Center ID</label>
+                        <p><b><?php echo $center; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Size</label>
-                        <p><b><?php echo $row["size"]; ?></b></p>
+                        <label>Employee ID</label>
+                        <p><b><?php echo $emp; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Distance (Km)</label>
-                        <p><b><?php echo $row["distance"]; ?></b></p>
+                        <label>Route ID</label>
+                        <p><b><?php echo $route; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Price (Rs)</label>
-                        <p><b><?php echo $row["price"]; ?></b></p>
+                        <label>Loaded Date & Time</label>
+                        <p><b><?php echo $time; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <p><b><?php echo $row["status"]; ?></b></p>
+                        <p><b><?php echo $status; ?></b></p>
                     </div>
                   
-                    <p><a href="javascript:history.back(1)" class="btn btn-primary">Back</a></p>
+                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        
         </div>

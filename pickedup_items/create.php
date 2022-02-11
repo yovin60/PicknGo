@@ -110,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="javascript:history.back(1)" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>        
