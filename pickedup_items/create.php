@@ -2,6 +2,7 @@
 session_start();
 $centerid = $_SESSION['cname'];
 $cname = $_SESSION['center'];
+$driver = $_SESSION['emp_id'];
 ?>
 <?php
 // // Include config file
@@ -99,7 +100,7 @@ $cname = $_SESSION['center'];
 
                                     <?php
                                         $conn = mysqli_connect("localhost", "root", "", "pickandgo");
-                                        $select = "SELECT * FROM pickup_orders INNER JOIN customer ON pickup_orders.cus_id = customer.cus_id WHERE status = 'APPROVED' && pickup_orders.nearest_center = '{$centerid}'";
+                                        $select = "SELECT * FROM pickup_orders INNER JOIN customer ON pickup_orders.cus_id = customer.cus_id WHERE status = 'APPROVED' && pickup_orders.nearest_center = '{$centerid}' && pickup_orders.emp_id='{$driver}'";
                                         $run = mysqli_query($conn, $select);
                                         while ($row = mysqli_fetch_array($run)) {
                                             $center_id = $row['order_id'];

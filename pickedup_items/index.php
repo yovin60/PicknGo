@@ -72,10 +72,11 @@ $cname = $_SESSION['center'];
                                         echo "<td>" . $row['size'] ."</td>";
                                         echo "<td>" . $row['distance'] ."</td>";
                                         echo "<td>" . $row['price'] ."</td>";
-                                        echo "<td>" . $row['status'] ."</td>";
+                                        echo "<td>" . $row['status'] ."</td>"; 
                                         
                                         echo "<td>";
                                             echo '<a href="read.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            echo '<a href="generatetracking.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="Generate Tracking record" data-toggle="tooltip"><span class="fa fa-spinner fa-pulse"></span></a>';
                                             echo '<a href="delete.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
         
                                         echo "</td>";

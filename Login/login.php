@@ -150,11 +150,8 @@ else
 
 
 if(isset($_POST['login']))
-
 {
-
 	$db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-
     $eml=$_POST['email'];
 	$pw=$_POST['password'];
 	$user="MANAGER";
@@ -167,24 +164,19 @@ if(isset($_POST['login']))
          $mail=$row['email'];
          $type=$row['user_type'];
 
-
             if (password_verify($pw, $row['password']) && $eml=($mail) && $user=($type)) 
                 {
-
-                
 		        echo '<script language="javascript">';
 		        echo 'alert("Login Successfull!")';
 		        echo'</script>';		
 		        echo "<script> location.href='../manager/manager.php';</script>";
 		        exit;
                 }   
-
+            
             else 
-
                {
-           
                  if(isset($_POST['login']))
-                  
+               
                   {
                     echo '<script language="javascript">';
 		            echo 'alert("Please Check your Details")';
@@ -193,6 +185,7 @@ if(isset($_POST['login']))
 	           }                     	
         }   
 }
+
 else 
 
     {
