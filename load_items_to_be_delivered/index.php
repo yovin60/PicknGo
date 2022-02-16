@@ -95,7 +95,7 @@ $emp = $_SESSION['emp_id'];
                     mysqli_close($db);
                     ?>
                 </div>
-                    <p><a href="../driver/driver.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="../driver/driver.php" class="btn btn-primary ml-3">Back</a></p>
                 </div>
                 </div>
             </div>        

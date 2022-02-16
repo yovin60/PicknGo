@@ -76,7 +76,7 @@ $cname = $_SESSION['center'];
                                         
                                         echo "<td>";
                                             echo '<a href="read.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="generatetracking.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="Generate Tracking record" data-toggle="tooltip"><span class="fa fa-spinner fa-pulse"></span></a>';
+                            
                                             echo '<a href="delete.php?picked_id='. $row['picked_id'] .'" class="mr-3" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
         
                                         echo "</td>";
@@ -97,7 +97,7 @@ $cname = $_SESSION['center'];
                     mysqli_close($db);
                     ?>
                 </div>
-                    <p><a href="javascript:history.back(1)" class="btn btn-primary">Back</a></p>
+                    <p><a href="javascript:history.back(1)" class="btn btn-primary ml-3">Back</a></p>
                 </div>
                 </div>
             </div>        

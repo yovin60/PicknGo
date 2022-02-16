@@ -103,7 +103,7 @@ $branch = $_SESSION['center'];
                     ?>
                 </center>
                 </div>
-                   <p><a href="../manager/manager.php" class="btn btn-secondary ml-2">Back</a></p>
+                   <p><a href="../manager/manager.php" class="btn btn-primary ml-3">Back</a></p>
                 </div>
                 </center>
                 </div>

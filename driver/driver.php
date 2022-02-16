@@ -41,7 +41,7 @@ $result = mysqli_query($db, "SELECT * FROM employee
                     <li><a href="../pickedup_items/index.php" target="">Picked up orders</a></li>
                     <li><a href="../load_items_to_be_delivered/index.php" target="">Loaded orders to be delivered</a></li>
                     <li><a href="../arrived_items_to_be_delivered/index.php" target="">Orders to be delivered</a></li>
-                    <li><a href="" target="">Completed Deliveries</a></li>
+                    <li><a href="../completed_deliveries/compOrdrTable.php" target="">Completed Deliveries</a></li>
 					
                     
 				</ul>

@@ -184,10 +184,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                                 <option></option>
                                 <?php
                                 $db = mysqli_connect('localhost', 'root', '', 'pickandgo');
-                                $sql2="SELECT * FROM pickedup_items WHERE center_id = '{$centerid}'";
+                                $sql2="SELECT * FROM pickedup_items INNER JOIN pickup_orders ON pickedup_items.order_id = pickup_orders.order_id WHERE center_id = '{$centerid}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
-                                    echo "<option value='".$row['picked_id']."'>".$row['picked_id']."</option>";
+                                    echo "<option value='".$row['picked_id']."'>".$row['picked_id'].' - '.$row['receiver_name']."</option>";
                                     }
                                 ?>
                             </select>
@@ -198,10 +198,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <select name="order_id" class="form-control" id="order_id">
                                 <option></option>
                                 <?php
-                                $sql2="SELECT * FROM pickedup_items WHERE center_id = '{$centerid}'";
+                                $sql2="SELECT * FROM pickedup_items INNER JOIN pickup_orders ON pickedup_items.order_id = pickup_orders.order_id WHERE center_id = '{$centerid}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
-                                    echo "<option value='".$row['order_id']."'>".$row['order_id']."</option>";
+                                    echo "<option value='".$row['order_id']."'>".$row['order_id'].' - '.$row['receiver_name']."</option>";
                                     }
                                 ?>
                             </select>
@@ -236,14 +236,14 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <span class="invalid-feedback"><?php echo $emp_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Route ID</label>
+                            <label>Route</label>
                             <select name="route_id" class="form-control" id="route_id">
                                 <option></option>
                                 <?php
                                 $sql2="SELECT * FROM routes WHERE start_center = '{$branch}'";
                                    $res=$db->query($sql2);
                                     while($row=$res->fetch_assoc()){
-                                    echo "<option value='".$row['route_id']."'>".$row['route_id']."</option>";
+                                    echo "<option value='".$row['route_id']."'>" .'From ' .$row['start_center'].' to ' .$row['destination_center']."</option>";
                                     }
                                 ?>
                             </select>

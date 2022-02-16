@@ -79,7 +79,7 @@
                     mysqli_close($db);
                     ?>
                 </div>
-                    <p align="Center"><a href="../admin/admin.php" class="btn btn-primary">Back</a></p>
+                    <p align="Center"><a href="../admin/admin.php" class="btn btn-primary ml-3">Back</a></p>
                 </div>
                 </div>
             </div>        

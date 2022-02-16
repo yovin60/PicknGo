@@ -68,8 +68,8 @@ if (isset($_POST['login'])) {
 						<a class="txt1" href="../admin_password_reset/email_input.php" >
 							Reset admin password ||
 						</a>
-						<a class="txt1" href="#" >
-							Reset user password ||
+						<a class="txt1" href="../customer_password_reset/email_input.php" >
+							Reset customer password ||
 						</a>
 						<a class="txt1" href="../employee_password_reset/email_input.php" >
 							Reset employee password
@@ -127,6 +127,52 @@ if(isset($_POST['login']))
 		        echo 'alert("Login Successfull!")';
 		        echo'</script>';		
 		        echo "<script> location.href='../admin/admin.php';</script>";
+		        exit;
+		}
+                                                 	
+
+	}
+}
+
+else 
+
+    {
+        
+        if(isset($_POST['login']))
+    {
+
+        echo '<script language="javascript">';
+		echo 'alert("Please Check your Details")';
+		echo'</script>';
+	}
+
+	}
+
+if(isset($_POST['login']))
+
+{
+	$db = mysqli_connect('localhost', 'root', '', 'pickandgo');
+
+    $eml=$_POST['email'];
+	$pw=$_POST['password'];
+
+    $_SESSION['mail']=$_POST['email'];
+    $session=$_SESSION['mail'];
+    $result = mysqli_query($db, "SELECT * FROM customer where email='{$eml}'");
+    while($row = mysqli_fetch_array($result))
+    
+    {
+        $id=$row['password'];
+        $mail=$row['email'];
+
+        if (password_verify($pw, $row['password']) && $eml=($mail)) 
+
+        {
+		
+		        echo '<script language="javascript">';
+		        echo 'alert("Login Successfull!")';
+		        echo'</script>';		
+		        echo "<script> location.href='../customer/customer.php';</script>";
 		        exit;
 		}
                                                  	

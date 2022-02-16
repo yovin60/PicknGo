@@ -85,7 +85,7 @@
                     mysqli_close($db);
                     ?>
                 </div>
-                    <p><a href="../admin/admin.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="../admin/admin.php" class="btn btn-primary ml-3">Back</a></p>
                 </div>
                 </div>
             </div>        

@@ -54,9 +54,9 @@ $centerid = $_SESSION['cname'];
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th>Order_ID</th>";
-                                        echo "<th>Cus_ID</th>";
+                                        echo "<th>Client</th>";
                                         echo "<th>Order_Name</th>";
-                                        echo "<th>Timestamp</th>";
+                                        echo "<th>Ordered Date & TIme</th>";
                                         echo "<th>Pickup Address</th>";
                                         echo "<th>Availability</th>";
                                         echo "<th>Receiver Name</th>";
@@ -64,7 +64,7 @@ $centerid = $_SESSION['cname'];
                                         echo "<th>Receiver Number</th>";
                                         echo "<th>Nearest Center</th>";
                                         echo "<th>Pickup Time</th>";
-                                        echo "<th>Driver ID</th>";
+                                        echo "<th>Driver</th>";
                                         echo "<th>Status</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
@@ -107,7 +107,7 @@ $centerid = $_SESSION['cname'];
                     ?>
                 </center>
                 </div>
-                   <p><a href="javascript:history.back(1)" class="btn btn-secondary ml-2">Back</a></p>
+                   <p><a href="javascript:history.back(1)" class="btn btn-primary ml-3">Back</a></p>
                 </div>
                 </center>
                 </div>
