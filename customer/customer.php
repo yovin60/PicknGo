@@ -35,7 +35,8 @@ $result = mysqli_query($db, "SELECT * FROM customer WHERE email='{$mail}'");
 				<ul class="links">
 					<li><a href="../index.html">Log out</a></li>
 					<li><a href="../edit_customer_account/editdetails.php" target="">Account Settings</a></li>
-					<li><a href="" target="">Request Order</a></li>
+					<li><a href="../req_pickup_order/index.php" target="">My Pending Orders</a></li>
+					<li><a href="../req_pickup_order/myapproved_orders.php" target="">My Approved Orders</a></li>
                     <li><a href="../tracking/confirm.php" target="">Track My Order</a></li>
                     
 					

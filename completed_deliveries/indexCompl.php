@@ -75,7 +75,7 @@ $driver = $_SESSION['emp_id'];
                                 <input type="text" class="form-control" name="loadId" id="loadId" value="" readonly> 
                             </div>
                             <div class="form-group">
-                                <label> Rout Id</label>
+                                <label> Route Id</label>
                                 <input type="text" class="form-control" name="routId" id="routId" value="" readonly> 
                             </div>
                             <div class="form-group col-md-8 mt-3">
