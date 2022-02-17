@@ -30,7 +30,9 @@ if(isset($_POST['Pick'])){
           echo "Error: " . $sql . "<br>" . $conn->error;
         }
   
-    header("location: index.php"); //return to
+    echo "<script> 
+            window.location.href='index.php';
+            </script>";
   }
 
 //Tracking table Update
@@ -89,7 +91,10 @@ if(isset($_POST['Pick'])){
     $mail->Body    = ''.$picked_Id.' is your Tracking code for your order and the order ID is '.$order_Id.'';
     if($mail->Send())
     {
-      header("location: index.php");
+      echo "<script> 
+            alert('Record Inserted successfully!');
+            window.location.href='index.php';
+            </script>";
     }
     else
     {

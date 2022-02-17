@@ -76,7 +76,7 @@ $emp = $_SESSION['emp_id'];
                                         
                                         echo "<td>";
                                             echo '<a href="read.php?load_id='. $row['load_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="delete.php?load_id='. $row['load_id'] .'" class="mr-3" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            
                                         echo "</td>";
                                     echo "</tr>";
                                 }
