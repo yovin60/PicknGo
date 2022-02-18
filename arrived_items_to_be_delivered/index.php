@@ -49,11 +49,11 @@ $emp = $_SESSION['emp_id'];
                     $sql = "SELECT * FROM ((((((arrived_items
                     INNER JOIN pickedup_items ON arrived_items.picked_id = pickedup_items.picked_id)
                     INNER JOIN pickup_orders ON arrived_items.order_id = pickup_orders.order_id)
-                    INNER JOIN employee ON arrived_items.emp_id = employee.emp_id)
+                    INNER JOIN employee ON arrived_items.driver_id = employee.emp_id)
                     INNER JOIN loaded_items ON arrived_items.load_id = loaded_items.load_id)
                     INNER JOIN routes ON arrived_items.route_id = routes.route_id)
                     INNER JOIN operational_centers ON arrived_items.center_id = operational_centers.center_id)  
-                    WHERE arrived_items.emp_id = '{$emp}'";
+                    WHERE arrived_items.driver_id = '{$emp}'";
 
                     if($result = mysqli_query($db, $sql)){
                         if(mysqli_num_rows($result) > 0){

@@ -76,7 +76,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Check input errors before inserting in database
     if(empty($picked_err) && empty($order_err) && empty($emp_err) && empty($load_err) && empty($route_err) && empty($center_err) && empty($status_err)){
         // Prepare an update statement
-        $sql = "UPDATE arrived_items SET picked_id=?, order_id=?, emp_id=?, load_id=?, route_id=?, center_id=?, status=? WHERE arrived_id=?";
+        $sql = "UPDATE arrived_items SET picked_id=?, order_id=?, driver_id=?, load_id=?, route_id=?, center_id=?, status=? WHERE arrived_id=?";
          
         if($stmt = mysqli_prepare($db, $sql)){
             // Bind variables to the prepared statement as parameters

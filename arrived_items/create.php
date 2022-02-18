@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     // Check input errors before inserting in database
     if(empty($picked_err) && empty($order_err) && empty($emp_err) && empty($load_err) && empty($route_err) && empty($center_err) && empty($status_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO arrived_items (picked_id, order_id, emp_id, load_id, route_id, center_id, status) VALUES (?, ?, ?, ?, ?, ?,?)";
+        $sql = "INSERT INTO arrived_items (picked_id, order_id, driver_id, load_id, route_id, center_id, status) VALUES (?, ?, ?, ?, ?, ?,?)";
          
         if($stmt = mysqli_prepare($db, $sql)){
             // Bind variables to the prepared statement as parameters

@@ -35,13 +35,13 @@ $driver = $_SESSION['emp_id'];
                                     <option> - select - </option>
                                 <?php
                                         $conn = mysqli_connect("localhost", "root", "", "pickandgo");
-                                        $select = "SELECT * FROM arrived_items INNER JOIN pickup_orders ON arrived_items.order_id = pickup_orders.order_id WHERE arrived_items.emp_id = '{$driver}'";
+                                        $select = "SELECT * FROM arrived_items INNER JOIN pickup_orders ON arrived_items.order_id = pickup_orders.order_id WHERE arrived_items.driver_id = '{$driver}'";
                                         $run = mysqli_query($conn, $select);
                                         while ($row = mysqli_fetch_array($run)) {
                                             $order_id = $row['order_id'];
                                             $arrived_id = $row['arrived_id'];
                                             $picked_id = $row['picked_id'];
-                                            $emp_id = $row['emp_id'];
+                                            $emp_id = $row['driver_id'];
                                             $load_id = $row['load_id'];
                                             $route_id = $row['route_id'];
                                             $center_id = $row['center_id'];

@@ -29,7 +29,7 @@ if(isset($_GET["arrived_id"]) && !empty(trim($_GET["arrived_id"]))){
                 $picked = $row["picked_id"];
                 $order = $row["order_id"];
                 $center = $row["center_id"];
-                $emp = $row["emp_id"];
+                $emp = $row["driver_id"];
                 $route = $row["route_id"];
                 $time = $row["arrived_time"];
                 $status = $row["status"];
